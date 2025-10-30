@@ -1,0 +1,78 @@
+---
+title: "Group Project"
+author: "Lucien Patchett"
+date: "2025-10-30"
+output:
+  github_document:
+    toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#Question
+Can music be used an an analgesic in patients with Fibromyalgia?
+
+#Hypothesis
+Participants who present with a diagnosis of Fibromyalgia will demonstrate a decrease to nociception in response to listening to music.
+
+#Visualizations
+We decided to use a Boxplot in order to best visualize the range of reported values from patients.
+
+#Pic1 and Pic2 code chunk
+``` {r code pic chunks}
+
+library(ggplot2)
+library(tidyr)
+library(dplyr)
+
+data <- read.csv("dataset.csv")
+
+# Pivot pic1 and pic2 into long format
+data_long <- data %>%
+  pivot_longer(cols = c(pic1, pic2), names_to = "treatment", values_to = "value")
+
+# Make boxplot
+ggplot(data_long, aes(x = treatment, y = value, fill = treatment)) +
+  geom_boxplot(alpha = 0.7, width = 0.6) +
+  theme_classic() +
+  scale_fill_brewer(palette = "Set2") +
+  ylab("Pain Level") +
+  xlab("") +
+  theme(
+    axis.text = element_text(size = 14),
+    axis.title = element_text(size = 16, face = "bold"),
+    legend.position = "none"
+  )
+
+```
+
+#Pim1 and Pim2 code chunk
+``` {r code chunk pim}
+library(ggplot2)
+library(tidyr)
+library(dplyr)
+
+data <- read.csv("dataset.csv")
+
+# Pivot pim1 and pim2 into long format
+data_long_pim <- data %>%
+  pivot_longer(cols = c(pim1, pim2), names_to = "treatment", values_to = "value")
+
+# Make boxplot
+ggplot(data_long_pim, aes(x = treatment, y = value, fill = treatment)) +
+  geom_boxplot(alpha = 0.7, width = 0.6) +
+  theme_classic() +
+  scale_fill_brewer(palette = "Set2") +
+  ylab("Pain Level") +
+  xlab("") +
+  theme(
+    axis.text = element_text(size = 14),
+    axis.title = element_text(size = 16, face = "bold"),
+    legend.position = "none"
+  )
+```
+
+#Accompanying Analysis Code Chunk
+We could use a PCA for further analysis of our data set as a way to group by age so that we can visualize if there is any correlation between age and reduction in pain. From there we would be able to run further testing to see how the nervous systems aging process might effect nociception.
